@@ -5,6 +5,14 @@ const port = process.env.PORT || 3001;
 // Middleware to parse JSON bodies
 app.use(express.json());
 
+// Point de terminaison pour créer un article
+app.post('/api/articles', (req, res) => {
+  const { title, description } = req.body; // Extraction de titre et description du corps de la requête
+  // Ici, vous pourriez ajouter le code pour sauvegarder ces données dans une base de données
+  console.log('Article reçu:', { title, description }); // Afficher dans la console pour le débogage
+  res.status(201).send({ message: 'Article créé avec succès', article: { title, description } });
+});
+
 // Define a GET route
 app.get('/', (req, res) => {
   res.send('Hello World!');
