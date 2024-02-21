@@ -1,8 +1,10 @@
 import Image from "next/image";
+import ButtonCreate from '../app/components/ButtonCreate';
 
 export default function Home() {
   return (
     <main className="flex flex-wrap min-h-screen p-8 bg-gray-100">
+      
       <div className="flex flex-1 flex-col items-center justify-center w-full lg:w-3/4 p-4">
         <h1 className="text-4xl font-bold mb-6 text-center text-gray-800">Simple Page</h1>
         <p className="mb-6 text-lg text-gray-700">
@@ -14,6 +16,7 @@ export default function Home() {
         <p className="text-lg text-gray-700">
           Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim.
         </p>
+        <ButtonCreate/>     
       </div>
       <aside className="w-full lg:w-1/4 p-4">
         <div className="bg-white p-6 mb-4 shadow-lg rounded-lg">
@@ -28,6 +31,7 @@ export default function Home() {
           <h2 className="text-lg font-semibold mb-2">Special Offer</h2>
           <p>Yet another ad simulation with unique offers.</p>
         </div>
+        
       </aside>
     </main>
   );
