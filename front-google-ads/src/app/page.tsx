@@ -1,38 +1,49 @@
-import Image from "next/image";
-import ButtonCreate from '../app/components/ButtonCreate';
+import Layout from '@/app/components/Layout';
+import React from 'react';
 
-export default function Home() {
-  return (
-    <main className="flex flex-wrap min-h-screen p-8 bg-gray-100">
-      
-      <div className="flex flex-1 flex-col items-center justify-center w-full lg:w-3/4 p-4">
-        <h1 className="text-4xl font-bold mb-6 text-center text-gray-800">Simple Page</h1>
-        <p className="mb-6 text-lg text-gray-700">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.
-        </p>
-        <p className="mb-6 text-lg text-gray-700">
-          Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi.
-        </p>
-        <p className="text-lg text-gray-700">
-          Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim.
-        </p>
-        <ButtonCreate/>     
-      </div>
-      <aside className="w-full lg:w-1/4 p-4">
-        <div className="bg-white p-6 mb-4 shadow-lg rounded-lg">
-          <h2 className="text-lg font-semibold mb-2">Ad Placement</h2>
-          <p>This is a simulated Google Ads placement.</p>
-        </div>
-        <div className="bg-white p-6 mb-4 shadow-lg rounded-lg">
-          <h2 className="text-lg font-semibold mb-2">Featured Promotion</h2>
-          <p>Another Google Ads simulation with a twist.</p>
-        </div>
-        <div className="bg-white p-6 shadow-lg rounded-lg">
-          <h2 className="text-lg font-semibold mb-2">Special Offer</h2>
-          <p>Yet another ad simulation with unique offers.</p>
-        </div>
-        
-      </aside>
-    </main>
-  );
+interface AdBannerProps {
+  title: string;
+  width: string;
+  height: string;
+  bgColor?: string;
 }
+
+
+
+const AdBanner: React.FC<AdBannerProps> = ({ title, width, height, bgColor = 'bg-gray-100' }) => {
+  return (
+    <div
+      role="banner"
+      aria-label={`${title} Advertisement`}
+      style={{ width, height }}
+      className={`${bgColor} flex justify-center items-center m-4 border border-gray-200 shadow-lg`}
+    >
+      <span className="text-sm font-semibold">{title}</span>
+    </div>
+  );
+};
+
+export default function AdsPage() {
+  return (
+    <Layout>
+      <header className="text-center my-8">
+        <h1 className="text-4xl font-bold">The Blog Times</h1>
+      </header>
+      <article className="mb-8">
+        <h2 className="text-2xl font-semibold mb-4">Welcome to Our Blog</h2>
+        <p className="mb-4">Here’s a fascinating article about the wonders of the natural world...</p>
+        {/* <AdBanner title="Full-Width Homepage Banner" width="2272px" height="454px" /> */}
+        <p className="mb-4">Curabitur non nulla sit amet nisl tempus convallis quis ac lectus...</p>
+      </article>
+      <div className="flex flex-wrap justify-between">
+        <AdBanner title="Homepage Banner" width="374px" height="374px" bgColor="bg-blue-300" />
+        <AdBanner title="Article Page Banner" width="303px" height="527px" bgColor="bg-green-300" />
+      </div>
+      <article className="my-8">
+        <h2 className="text-2xl font-semibold mb-4">Another Insightful Piece</h2>
+        <p className="mb-4">This article delves into the advancements in technology...</p>
+        <AdBanner title="Newsletter Banner" width="1136px" height="227px" bgColor="bg-yellow-300" />
+      </article>
+    </Layout >
+  );
+};

@@ -13,6 +13,16 @@ app.post('/api/articles', (req, res) => {
   res.status(201).send({ message: 'Article créé avec succès', article: { title, description } });
 });
 
+// GET endpoint to retrieve all articles
+app.get('/api/articles', (req, res) => {
+  // Ici, vous pourriez ajouter le code pour récupérer les articles depuis une base de données
+  const articles = [
+    { title: 'Premier article', description: 'Description du premier article' },
+    { title: 'Deuxième article', description: 'Description du deuxième article' },
+  ];
+  res.status(200).send(articles);
+});
+
 // Define a GET route
 app.get('/', (req, res) => {
   res.send('Hello World!');
