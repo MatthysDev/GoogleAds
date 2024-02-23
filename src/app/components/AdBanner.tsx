@@ -1,21 +1,41 @@
+import React, { useState } from 'react';
+import Image from 'next/image';
+
 interface AdBannerProps {
   title: string;
-  width?: string;
-  height?: string;
+  width: number;
+  height: number;
   bgColor?: string;
-  imgUrl: string; // New prop for the image URL
+  imgUrl: string;
   style?: string;
+  link: string;
 }
 
-export const AdBanner: React.FC<AdBannerProps> = ({ style, title, width, height, bgColor = 'bg-gray-100', imgUrl }) => {
+export const AdBanner: React.FC<AdBannerProps> = ({
+  link,
+  style,
+  title,
+  width,
+  height,
+  bgColor = 'bg-gray-100',
+  imgUrl,
+}) => {
   return (
     <div
       role="banner"
       aria-label={`${title} Advertisement`}
-      style={{ width, height }}
-      className={`${bgColor} ${style} flex justify-center items-center m-4 border border-gray-200 shadow-lg`}
+      className={`${bgColor} ${style} flex justify-center items-center border border-gray-200 shadow-lg cursor-pointer`}
+      style={{ width, height }} // Use the isLoaded state to control visibility
     >
-      <img src={imgUrl} alt={title} className="object-cover" style={{ width, height }} />
+      <a href={link} target="_blank" rel="noopener noreferrer">
+        <Image
+          src={imgUrl}
+          alt={title}
+          width={width}
+          height={height}
+        />
+      </a>
     </div>
+
   );
 };

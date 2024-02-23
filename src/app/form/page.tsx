@@ -1,21 +1,23 @@
 'use client';
 import { useState } from 'react';
-import Layout from '../components/Layout';
+import Layout from '../components/Layout'; // Adjust this import to match your project structure
 import Link from 'next/link';
 import { supabase } from '@/app/components/supabase'; // Ensure this path matches where your Supabase client is initialized
 
 interface Query {
   img_url: string;
   ads_name: string;
-  size: string; // Add size to your Query interface
+  size: string;
+  ads_link: string; // Added field for ad's link
 }
 
 function Form() {
-  // Define initial state for resetting the form
+  // Updated initial state to include the ads_link
   const initialState: Query = {
     img_url: '',
     ads_name: '',
-    size: ''
+    size: '',
+    ads_link: '', // Initialize ads_link with an empty string
   };
 
   const [newAds, setNewAds] = useState<Query>(initialState);
@@ -26,16 +28,15 @@ function Form() {
   };
 
   const addProposal = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault(); // Prevents the default form submission behavior
     const { data, error } = await supabase
       .from('ads')
-      .insert([newAds]);
+      .insert([newAds]); // Inserts the new ad data into the Supabase 'ads' table
     if (error) {
       console.error("Error inserting new ad:", error.message);
     } else {
       console.log("Ad successfully added:", data);
-      // Reset the form here by setting newAds back to the initialState
-      setNewAds(initialState);
+      setNewAds(initialState); // Resets the form to its initial state after successful submission
     }
   };
 
@@ -85,6 +86,19 @@ function Form() {
               <option value="303x527">303 x 527</option>
               <option value="1136x227">1136 x 227</option>
             </select>
+          </div>
+          <div className="mb-4">
+            <label htmlFor="ads_link" className='text-gray-700 text-sm block'>Ad Link URL</label>
+            <input
+              autoComplete='off'
+              type="text"
+              id="ads_link"
+              name="ads_link"
+              placeholder="Enter ad link URL"
+              value={newAds.ads_link}
+              onChange={handleChange}
+              className="input-field border border-gray-300 rounded-lg w-full p-2 mt-2 text-gray-700 text-sm"
+            />
           </div>
           <button
             type="submit"
